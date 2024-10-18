@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe - Part 3</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1 style="text-align: center;">Tic Tac Toe Game</h1>
+    <div class="status" id="turnStatus">X's turn</div>
+    <div class="container">
+        <script>
+            const NUM_SQUARES = 9;
+            for (i = 0; i < NUM_SQUARES; i++) {
+                 id = "sq" + i;
+                document.write("<div class='square' id='" + id + "'></div>");
+            }
+        </script>
+    </div>
+    <div class="status" id="winStatus">Game in progress...</div>
+    <button onclick="startGame()">Start Game</button>
+    <script>
+        currentPlayer = Math.random() > 0.5 ? "X" : "O";
+        document.getElementById("turnStatus").innerText = currentPlayer + "'s turn";
+        const squares = document.querySelectorAll(".square");
+
+        squares.forEach((square, index) => {
+            square.addEventListener("click", function() {
+                if (square.innerText === "") {
+                    square.innerText = currentPlayer;
+                    alert("You clicked square " + index);
+                    currentPlayer = currentPlayer === "X" ? "O" : "X";
+                    document.getElementById("turnStatus").innerText = currentPlayer + "'s turn";
+                }
+            });
+        });
+
+        function startGame() {
+            squares.forEach(square => {
+                square.innerText = "";
+            });
+            currentPlayer = Math.random() > 0.5 ? "X" : "O";
+            document.getElementById("turnStatus").innerText = currentPlayer + "'s turn";
+        }
+    </script>
+</body>
+</html>
